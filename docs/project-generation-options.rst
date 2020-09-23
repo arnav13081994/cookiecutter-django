@@ -119,7 +119,11 @@ ci_tool:
     1. None
     2. `Travis CI`_
     3. `Gitlab CI`_
+<<<<<<< HEAD
     4. `Github CI`_
+=======
+    4. `Github Actions`_
+>>>>>>> c567793453cc28f69ac3e07655ea2b4e2dfc080b
 
 keep_local_envs_in_vcs:
     Indicates whether the project's ``.envs/.local/`` should be kept in VCS
@@ -177,4 +181,8 @@ debug:
 
 .. _GitLab CI: https://docs.gitlab.com/ee/ci/
 
+<<<<<<< HEAD
 .. _Github CI: https://docs.github.com/en/actions
+=======
+.. _Github Actions: https://docs.github.com/en/actions
+>>>>>>> c567793453cc28f69ac3e07655ea2b4e2dfc080b

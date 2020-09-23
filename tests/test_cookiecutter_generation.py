@@ -139,6 +139,7 @@ def check_paths(paths):
 @pytest.mark.parametrize("context_override", SUPPORTED_COMBINATIONS, ids=_fixture_id)
 def test_project_generation(cookies, context, context_override):
     """Test that project is generated and fully rendered."""
+
     result = cookies.bake(extra_context={**context, **context_override})
     assert result.exit_code == 0
     assert result.exception is None
@@ -226,12 +227,11 @@ def test_gitlab_invokes_flake8_and_pytest(
             pytest.fail(e)
 
 
-
 @pytest.mark.parametrize(
     ["use_docker", "expected_test_script"],
     [
         ("n", "pytest"),
-        ("y", "docker-compose -f local.yml run django pytest"),
+        ("y", "docker-compose -f local.yml exec -T django pytest"),
     ],
 )
 def test_github_invokes_flake8_and_pytest(
@@ -245,11 +245,21 @@ def test_github_invokes_flake8_and_pytest(
     assert result.project.basename == context["project_slug"]
     assert result.project.isdir()
 
-    with open(f"{result.project}/.github/workflows/.github-ci.yml", "r") as github_yml:
+    with open(f"{result.project}/.github/workflows/ci.yml", "r") as github_yml:
         try:
             github_config = yaml.safe_load(github_yml)
-            assert github_config["flake8"]["script"] == ["flake8"]
-            assert github_config["pytest"]["script"] == [expected_test_script]
+            flake8_present = False
+            for action_step in github_config["jobs"]["flake8"]["steps"]:
+                if action_step.get("run") == "flake8":
+                    flake8_present = True
+            assert flake8_present
+
+            expected_test_script_present = False
+            for action_step in github_config["jobs"]["pytest"]["steps"]:
+                if action_step.get("run") == expected_test_script:
+                    expected_test_script_present = True
+            assert expected_test_script_present
+
         except yaml.YAMLError as e:
             pytest.fail(e)
 
