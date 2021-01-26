@@ -59,6 +59,8 @@ RUN pip install --no-cache /wheels/* \
 	&& rm -rf /wheels
 
 
-WORKDIR /docs
+COPY ./compose/local/docs/start /start-docs
+RUN sed -i 's/\r$//g' /start-docs
+RUN chmod +x /start-docs
 
-CMD make livehtml
+WORKDIR /docs
