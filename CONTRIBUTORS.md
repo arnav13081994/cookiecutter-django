@@ -979,6 +979,13 @@ Listed in alphabetical order.
     <td></td>
   </tr>
   <tr>
+    <td>lcd1232</td>
+    <td>
+      <a href="https://github.com/lcd1232">lcd1232</a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
     <td>Leo won</td>
     <td>
       <a href="https://github.com/leollon">leollon</a>
@@ -1220,6 +1227,13 @@ Listed in alphabetical order.
     <td>Pierre Chiquet</td>
     <td>
       <a href="https://github.com/pchiquet">pchiquet</a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>PJ Hoberman</td>
+    <td>
+      <a href="https://github.com/pjhoberman">pjhoberman</a>
     </td>
     <td></td>
   </tr>
